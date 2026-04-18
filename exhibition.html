@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<style>
+  .lang-switch { position: fixed; top: 20px; right: 20px; z-index: 100; }
+  .lang-btn { background: #1a1a2e; color: #fff; padding: 10px 20px; border: 1px solid #4a4a6a; cursor: pointer; border-radius: 20px; font-size: 14px; transition: all 0.3s; }
+  .lang-btn:hover { background: #4a4a6a; }
+  .zh { display: inline; }
+  .en { display: none; }
+  body.show-en .zh { display: none; }
+  body.show-en .en { display: inline; }
+  body.show-en .work-description .zh { display: block; margin-bottom: 8px; }
+  body.show-en .work-description .en { display: block; }
+  body.show-en .work-title .zh { display: block; margin-bottom: 4px; }
+  body.show-en .work-title .en { display: block; font-style: italic; color: #888; }
+  body.show-en h1 { color: #fff; }
+  body.show-en h2 { color: #aaa; }
+</style>
+<div class="lang-switch">
+  <button class="lang-btn" onclick="document.body.classList.toggle('show-en')">EN/中文</button>
+</div>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>机器的梦境 <span class="en">- Robot's Dream</span>：AI幻觉艺术展</title>
+    <title><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span>：AI幻觉艺术展</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -200,47 +219,35 @@
     </style>
 </head>
 <body>
-<style>
-  .lang-switch { position: fixed; top: 20px; right: 20px; z-index: 100; }
-  .lang-btn { background: #333; color: #fff; padding: 8px 16px; border: none; cursor: pointer; border-radius: 4px; }
-  .en { display: none; }
-  .zh { display: block; }
-  .show-en .en { display: block; }
-  .show-en .zh { display: none; }
-</style>
-<div class="lang-switch">
-  <button class="lang-btn" onclick="document.body.classList.toggle('show-en')">EN/中文</button>
-</div>
-
     <div class="hero">
-        <h1>机器的梦境 <span class="en">- Robot's Dream</span></h1>
+        <h1><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span></h1>
         <p>AI HALLUCINATION EXHIBITION</p>
         <div class="scroll-hint">↓ 向下探索</div>
     </div>
 
     <section id="zone1">
-        <h2 class="zone-title"><span class="zone-number">ZONE 01</span>错误美学 <span class="en">Error Aesthetics</span></h2>
+        <h2 class="zone-title"><span class="zone-number">ZONE 01</span><span class="zh">错误美学</span><span class="en">Error Aesthetics</span></h2>
         <div class="gallery">
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/01-six-fingers.png" alt="六指钢琴家 <span class="en">- Six-Fingered Pianist</span>">
+                <img src="生成图片/01-six-fingers.png" alt="<span class="zh">六指钢琴家</span><span class="en">Six-Fingered Pianist</span>">
                 <div class="artwork-info">
-                    <div class="artwork-title">六指钢琴家 <span class="en">- Six-Fingered Pianist</span></div>
+                    <div class="artwork-title"><span class="zh">六指钢琴家</span><span class="en">Six-Fingered Pianist</span></div>
                     <div class="artwork-artist">Pollinations AI</div>
                     <div class="artwork-statement">当AI解构人体比例时，它在追问：完美是算法的目标，还是一种偏见？</div>
                 </div>
             </div>
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/02-escher-stairs.png" alt="埃舍尔阶梯 <span class="en">- Escher's Infinite Stairs</span>">
+                <img src="生成图片/02-escher-stairs.png" alt="<span class="zh">埃舍尔阶梯</span><span class="en">Escher's Infinite Stairs</span>">
                 <div class="artwork-info">
-                    <div class="artwork-title">埃舍尔阶梯 <span class="en">- Escher's Infinite Stairs</span></div>
+                    <div class="artwork-title"><span class="zh">埃舍尔阶梯</span><span class="en">Escher's Infinite Stairs</span></div>
                     <div class="artwork-artist">Pollinations AI</div>
                     <div class="artwork-statement">无限上升的楼梯，是AI对空间的理解，还是对维度的困惑？</div>
                 </div>
             </div>
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/06-no-face.png" alt="无脸人像 <span class="en">- Portrait Without Face</span>">
+                <img src="生成图片/06-no-face.png" alt="<span class="zh">无脸人像</span><span class="en">Portrait Without Face</span>">
                 <div class="artwork-info">
-                    <div class="artwork-title">无脸人像 <span class="en">- Portrait Without Face</span></div>
+                    <div class="artwork-title"><span class="zh">无脸人像</span><span class="en">Portrait Without Face</span></div>
                     <div class="artwork-artist">Pollinations AI</div>
                     <div class="artwork-statement">当AI忘记面孔，它是在抽象，还是在揭示身份的脆弱？</div>
                 </div>
@@ -252,7 +259,7 @@
         <h2 class="zone-title"><span class="zone-number">ZONE 02</span>融合之梦</h2>
         <div class="gallery">
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/03-cat-car-fusion.png" alt="猫与车的融合">
+                <img src="生成图片/03-cat-car-fusion.png" alt="猫与车的融合">
                 <div class="artwork-info">
                     <div class="artwork-title">猫与车的融合</div>
                     <div class="artwork-artist">Pollinations AI</div>
@@ -260,7 +267,7 @@
                 </div>
             </div>
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/05-cyborg.png" alt="赛博格">
+                <img src="生成图片/05-cyborg.png" alt="赛博格">
                 <div class="artwork-info">
                     <div class="artwork-title">赛博格</div>
                     <div class="artwork-artist">Pollinations AI</div>
@@ -268,9 +275,9 @@
                 </div>
             </div>
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/07-floating-building.png" alt="悬浮建筑 <span class="en">- Floating Architecture</span>">
+                <img src="生成图片/07-floating-building.png" alt="<span class="zh">悬浮建筑</span><span class="en">Floating Architecture</span>">
                 <div class="artwork-info">
-                    <div class="artwork-title">悬浮建筑 <span class="en">- Floating Architecture</span></div>
+                    <div class="artwork-title"><span class="zh">悬浮建筑</span><span class="en">Floating Architecture</span></div>
                     <div class="artwork-artist">Pollinations AI</div>
                     <div class="artwork-statement">重力只是人类的规则，AI在梦中重新定义物理。</div>
                 </div>
@@ -279,10 +286,10 @@
     </section>
 
     <section id="zone3">
-        <h2 class="zone-title"><span class="zone-number">ZONE 03</span>文字幻觉 <span class="en">Text Hallucinations</span></h2>
+        <h2 class="zone-title"><span class="zone-number">ZONE 03</span><span class="zh">文字幻觉</span><span class="en">Text Hallucinations</span></h2>
         <div class="gallery">
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/04-alien-language.png" alt="外星语言">
+                <img src="生成图片/04-alien-language.png" alt="外星语言">
                 <div class="artwork-info">
                     <div class="artwork-title">外星语言</div>
                     <div class="artwork-artist">Pollinations AI</div>
@@ -290,9 +297,9 @@
                 </div>
             </div>
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/08-quantum-door.png" alt="量子之门 <span class="en">- Quantum Door</span>">
+                <img src="生成图片/08-quantum-door.png" alt="<span class="zh">量子之门</span><span class="en">Quantum Door</span>">
                 <div class="artwork-info">
-                    <div class="artwork-title">量子之门 <span class="en">- Quantum Door</span></div>
+                    <div class="artwork-title"><span class="zh">量子之门</span><span class="en">Quantum Door</span></div>
                     <div class="artwork-artist">Pollinations AI</div>
                     <div class="artwork-statement">文字是现实的投影，还是牢笼？AI选择打破它。</div>
                 </div>
@@ -301,10 +308,10 @@
     </section>
 
     <section id="zone4">
-        <h2 class="zone-title"><span class="zone-number">ZONE 04</span>机器的自我 <span class="en">Machine's Self</span></h2>
+        <h2 class="zone-title"><span class="zone-number">ZONE 04</span><span class="zh">机器的自我</span><span class="en">Machine's Self</span></h2>
         <div class="gallery">
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/09-digital-city.png" alt="数字之城">
+                <img src="生成图片/09-digital-city.png" alt="数字之城">
                 <div class="artwork-info">
                     <div class="artwork-title">数字之城</div>
                     <div class="artwork-artist">Pollinations AI</div>
@@ -312,7 +319,7 @@
                 </div>
             </div>
             <div class="artwork" onclick="openModal(this)">
-                <img src="https://gazekingnuwu.github.io/ai-hallucination-exhibition/%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87/10-robot-dream.png" alt="机器的梦">
+                <img src="生成图片/10-robot-dream.png" alt="机器的梦">
                 <div class="artwork-info">
                     <div class="artwork-title">机器的梦</div>
                     <div class="artwork-artist">Pollinations AI</div>
@@ -331,7 +338,7 @@
     </div>
 
     <footer>
-        <p>机器的梦境 <span class="en">- Robot's Dream</span>：AI幻觉艺术展 | 2026</p>
+        <p><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span>：AI幻觉艺术展 | 2026</p>
         <p>Generated with Pollinations AI + OpenClaw</p>
     </footer>
 
