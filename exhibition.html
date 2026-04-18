@@ -198,9 +198,22 @@
             color: #aaa;
         }
     </style>
+
+<style>
+.lang-switch { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+.lang-btn { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: #fff; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; border-radius: 25px; font-size: 14px; transition: all 0.3s; }
+.lang-btn:hover { background: rgba(255,255,255,0.2); }
+.zh { display: inline !important; }
+.en { display: none !important; }
+body.show-en .zh { display: none !important; }
+body.show-en .en { display: inline !important; }
+</style>
+<script>
+function toggleLang() { document.body.classList.toggle('show-en'); }
+</script>
 </head>
 <body>
-    <div class="lang-switch"><button class="lang-btn" onclick="document.body.classList.toggle('show-en')">EN/中文</button></div>
+<div class="lang-switch"><button class="lang-btn" onclick="toggleLang()">EN/中文</button></div>
 
     <div class="hero">
         <h1><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span></h1>
