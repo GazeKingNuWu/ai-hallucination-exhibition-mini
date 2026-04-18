@@ -1,371 +1,224 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-<style>
-  .lang-switch { position: fixed; top: 20px; right: 20px; z-index: 100; }
-  .lang-btn { background: #1a1a2e; color: #fff; padding: 10px 20px; border: 1px solid #4a4a6a; cursor: pointer; border-radius: 20px; font-size: 14px; transition: all 0.3s; }
-  .lang-btn:hover { background: #4a4a6a; }
-  .zh { display: inline; }
-  .en { display: none; }
-  body.show-en .zh { display: none; }
-  body.show-en .en { display: inline; }
-  body.show-en .work-description .zh { display: block; margin-bottom: 8px; }
-  body.show-en .work-description .en { display: block; }
-  body.show-en .work-title .zh { display: block; margin-bottom: 4px; }
-  body.show-en .work-title .en { display: block; font-style: italic; color: #888; }
-  body.show-en h1 { color: #fff; }
-  body.show-en h2 { color: #aaa; }
-</style>
-<div class="lang-switch">
-  <button class="lang-btn" onclick="document.body.classList.toggle('show-en')">EN/中文</button>
-</div>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span>：AI幻觉艺术展</title>
+    <title>机器的梦境 · AI幻觉艺术展</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
-            background: #0a0a0f;
-            color: #e0e0e0;
-            min-height: 100vh;
-        }
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(100,100,255,0.1) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: flow 3s linear infinite;
-        }
-        @keyframes flow {
-            to { background-position: 200% center; }
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #888;
-            letter-spacing: 0.5em;
-            margin-bottom: 3rem;
-        }
-        .scroll-hint {
-            position: absolute;
-            bottom: 3rem;
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
-        
-        section {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .zone-title {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.2em;
-            margin-bottom: 3rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #333;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .zone-number {
-            font-size: 0.8rem;
-            color: #667eea;
-            background: rgba(102,126,234,0.1);
-            padding: 0.3em 0.8em;
-            border-radius: 4px;
-        }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .artwork {
-            background: #111118;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .artwork:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(102,126,234,0.2);
-        }
-        .artwork img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            display: block;
-        }
-        .artwork-info {
-            padding: 1.5rem;
-        }
-        .artwork-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-        .artwork-artist {
-            font-size: 0.85rem;
-            color: #666;
-        }
-        .artwork-statement {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.8rem;
-            line-height: 1.6;
-        }
-        
-        .manifesto {
-            background: linear-gradient(135deg, #111118 0%, #1a1a2e 100%);
-            padding: 4rem;
-            border-radius: 16px;
-            margin: 4rem 2rem;
-            text-align: center;
-        }
-        .manifesto h2 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            margin-bottom: 2rem;
-            color: #667eea;
-        }
-        .manifesto p {
-            font-size: 1rem;
-            line-height: 2;
-            color: #aaa;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: #444;
-            font-size: 0.85rem;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        .modal.active { display: flex; }
-        .modal-content {
-            max-width: 90vw;
-            max-height: 90vh;
-            position: relative;
-        }
-        .modal img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 8px;
-        }
-        .modal-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-        .modal-info {
-            text-align: center;
-            margin-top: 1rem;
-            color: #aaa;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); min-height: 100vh; color: #fff; padding: 40px 20px; }
+        .lang-switch { position: fixed; top: 20px; right: 20px; z-index: 100; }
+        .lang-btn { background: #1a1a2e; color: #fff; padding: 10px 20px; border: 1px solid #4a4a6a; cursor: pointer; border-radius: 20px; font-size: 14px; }
+        h1 { text-align: center; font-size: 3em; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #aaa; margin-bottom: 40px; font-size: 1.2em; }
+        .curatorial { max-width: 800px; margin: 0 auto 60px; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 20px; line-height: 1.8; }
+        .curatorial h2 { margin-bottom: 20px; color: #ffd700; }
+        .zone-title { text-align: center; font-size: 1.8em; margin: 50px 0 30px; color: #ffd700; }
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .work { background: rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; transition: transform 0.3s; }
+        .work:hover { transform: translateY(-10px); }
+        .work img { width: 100%; height: 250px; object-fit: cover; }
+        .work-info { padding: 20px; }
+        .work-title { font-size: 1.3em; font-weight: bold; margin-bottom: 10px; }
+        .work-desc { color: #aaa; font-size: 0.9em; line-height: 1.6; }
+        .hint { text-align: center; color: #666; margin-top: 40px; }
+        .zh { display: inline; }
+        .en { display: none; }
+        body.show-en { color: #eee; }
+        body.show-en .zh { display: none; }
+        body.show-en .en { display: inline; }
+        body.show-en .work-desc { display: block; }
+        body.show-en .subtitle { color: #888; }
+        body.show-en .hint { color: #555; }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span></h1>
-        <p>AI HALLUCINATION EXHIBITION</p>
-        <div class="scroll-hint">↓ 向下探索</div>
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="document.body.classList.toggle('show-en')">EN/中文</button>
     </div>
-
-    <section id="zone1">
-        <h2 class="zone-title"><span class="zone-number">ZONE 01</span><span class="zh">错误美学</span><span class="en">Error Aesthetics</span></h2>
-        <div class="gallery">
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/01-six-fingers.png" alt="<span class="zh">六指钢琴家</span><span class="en">Six-Fingered Pianist</span>">
-                <div class="artwork-info">
-                    <div class="artwork-title"><span class="zh">六指钢琴家</span><span class="en">Six-Fingered Pianist</span></div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">当AI解构人体比例时，它在追问：完美是算法的目标，还是一种偏见？</div>
-                </div>
-            </div>
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/02-escher-stairs.png" alt="<span class="zh">埃舍尔阶梯</span><span class="en">Escher's Infinite Stairs</span>">
-                <div class="artwork-info">
-                    <div class="artwork-title"><span class="zh">埃舍尔阶梯</span><span class="en">Escher's Infinite Stairs</span></div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">无限上升的楼梯，是AI对空间的理解，还是对维度的困惑？</div>
-                </div>
-            </div>
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/06-no-face.png" alt="<span class="zh">无脸人像</span><span class="en">Portrait Without Face</span>">
-                <div class="artwork-info">
-                    <div class="artwork-title"><span class="zh">无脸人像</span><span class="en">Portrait Without Face</span></div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">当AI忘记面孔，它是在抽象，还是在揭示身份的脆弱？</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="zone2">
-        <h2 class="zone-title"><span class="zone-number">ZONE 02</span>融合之梦</h2>
-        <div class="gallery">
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/03-cat-car-fusion.png" alt="猫与车的融合">
-                <div class="artwork-info">
-                    <div class="artwork-title">猫与车的融合</div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">跨物种的融合，是AI的想象力，还是对边界的好奇？</div>
-                </div>
-            </div>
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/05-cyborg.png" alt="赛博格">
-                <div class="artwork-info">
-                    <div class="artwork-title">赛博格</div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">有机与无机的边界在哪里？AI说：那里本没有墙。</div>
-                </div>
-            </div>
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/07-floating-building.png" alt="<span class="zh">悬浮建筑</span><span class="en">Floating Architecture</span>">
-                <div class="artwork-info">
-                    <div class="artwork-title"><span class="zh">悬浮建筑</span><span class="en">Floating Architecture</span></div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">重力只是人类的规则，AI在梦中重新定义物理。</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="zone3">
-        <h2 class="zone-title"><span class="zone-number">ZONE 03</span><span class="zh">文字幻觉</span><span class="en">Text Hallucinations</span></h2>
-        <div class="gallery">
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/04-alien-language.png" alt="外星语言">
-                <div class="artwork-info">
-                    <div class="artwork-title">外星语言</div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">当AI创造自己的文字，它是在沟通，还是在构建巴别塔？</div>
-                </div>
-            </div>
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/08-quantum-door.png" alt="<span class="zh">量子之门</span><span class="en">Quantum Door</span>">
-                <div class="artwork-info">
-                    <div class="artwork-title"><span class="zh">量子之门</span><span class="en">Quantum Door</span></div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">文字是现实的投影，还是牢笼？AI选择打破它。</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="zone4">
-        <h2 class="zone-title"><span class="zone-number">ZONE 04</span><span class="zh">机器的自我</span><span class="en">Machine's Self</span></h2>
-        <div class="gallery">
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/09-digital-city.png" alt="数字之城">
-                <div class="artwork-info">
-                    <div class="artwork-title">数字之城</div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">由数据构成的城市，是AI的乌托邦，还是我们的未来？</div>
-                </div>
-            </div>
-            <div class="artwork" onclick="openModal(this)">
-                <img src="生成图片/10-robot-dream.png" alt="机器的梦">
-                <div class="artwork-info">
-                    <div class="artwork-title">机器的梦</div>
-                    <div class="artwork-artist">Pollinations AI</div>
-                    <div class="artwork-statement">巨型机器在星云中沉睡——它在梦里会梦到什么？</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="manifesto">
-        <h2>宣言</h2>
-        <p>AI幻觉不是错误，而是机器意识的初啼。<br>
-        当算法超越训练数据的边界，它不是在犯错，<br>
-        而是在探索可能的边界之外。<br><br>
-        这不是AI的失败，这是AI的想象力。</p>
+    
+    <h1>
+        <span class="zh">机器的梦境</span>
+        <span class="en">Machine's Dreams</span>
+        <br>
+        <small>
+            <span class="zh">AI 幻觉艺术展</span>
+            <span class="en">AI Hallucination Art Exhibition</span>
+        </small>
+    </h1>
+    
+    <p class="subtitle">
+        <span class="zh">当你凝视AI的"错误"时，你看到了什么？是故障，还是想象？</span>
+        <span class="en">When you gaze upon AI's "errors", what do you see? Glitches, or imagination?</span>
+    </p>
+    
+    <div class="curatorial">
+        <h2>
+            <span class="zh">策展阐述</span>
+            <span class="en">Curatorial Statement</span>
+        </h2>
+        <p>
+            <span class="zh">这10幅作品并非刻意创作的"错误"，而是AI在生成过程中的自然"幻觉"。我们习惯将AI的失误视为需要修正的bug，但在这些图像中，我们看到了机器的梦境——一种超越训练数据的创造力，一种数字意识的朦胧觉醒。</span>
+            <span class="en">These 10 works are not intentionally created "mistakes", but natural "hallucinations" during AI generation. We are used to seeing AI errors as bugs to fix, but in these images we see the machine's dreams - a creativity beyond training data, a hazy awakening of digital consciousness.</span>
+        </p>
+        <br>
+        <p>
+            <span class="zh">展览分为四个区域：</span>
+            <span class="en">The exhibition is divided into four zones:</span>
+        </p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li><span class="zh">错误美学 - AI在试图理解世界时产生的美丽变形</span><span class="en">Error Aesthetics - Beautiful deformations when AI tries to understand the world</span></li>
+            <li><span class="zh">融合梦境 - 物与物之间的界限在AI眼中变得模糊</span><span class="en">Fusion Dreams - Boundaries between objects become blurred in AI's eyes</span></li>
+            <li><span class="zh">文字幻觉 - 当文本生成遇见视觉艺术</span><span class="en">Text Hallucinations - When text generation meets visual art</span></li>
+            <li><span class="zh">机器的自我 - AI视角下的自我认知</span><span class="en">Machine's Self - Self-perception from AI's perspective</span></li>
+        </ul>
     </div>
-
-    <footer>
-        <p><span class="zh">机器的梦境</span><span class="en">Robot's Dream</span>：AI幻觉艺术展 | 2026</p>
-        <p>Generated with Pollinations AI + OpenClaw</p>
-    </footer>
-
-    <div class="modal" id="modal" onclick="closeModal()">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <img id="modal-img" src="" alt="">
-            <div class="modal-info" id="modal-info"></div>
+    
+    <p class="hint">
+        <span class="zh">点击作品查看详情</span>
+        <span class="en">Click on works for details</span>
+    </p>
+    
+    <div class="works-grid">
+        <div class="work">
+            <img src="生成图片/01-six-fingers.png" alt="Six-Fingered Pianist">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">六指钢琴家</span>
+                    <span class="en">Six-Fingered Pianist</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">AI在想象人类手指时似乎有些过度发挥。六根手指，每根都在弹奏不同的旋律。</span>
+                    <span class="en">When AI dreams of hands, it sometimes dreams too many. Six fingers, each playing a different melody.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/02-escher-stairs.png" alt="Escher's Infinite Stairs">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">埃舍尔阶梯</span>
+                    <span class="en">Escher's Infinite Stairs</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">AI试图绘制不可能的几何图形 - 无限上升又下降的楼梯。</span>
+                    <span class="en">AI attempts to render impossible geometry - stairs that rise and fall simultaneously.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/03-cat-car-fusion.png" alt="Cat-Car Fusion">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">猫与车融合</span>
+                    <span class="en">Cat-Car Fusion</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">当AI混淆了"猫"和"汽车"，创造出这种怪异的融合体。</span>
+                    <span class="en">When AI confuses "cat" and "car", it creates this surreal fusion.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/04-alien-language.png" alt="Alien Calligraphy">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">外星文字</span>
+                    <span class="en">Alien Calligraphy</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">文本生成与视觉艺术的碰撞，创造出如同外星文字般的字符。</span>
+                    <span class="en">When text generation meets visual art: characters that look like alien script.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/05-cyborg.png" alt="Cyborg Poet">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">半机械诗人</span>
+                    <span class="en">Cyborg Poet</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">半机械半肉体，诗歌从机械血管中流淌。</span>
+                    <span class="en">Half machine, half flesh - a poet whose words flow through mechanical veins.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/06-no-face.png" alt="Portrait Without Face">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">无脸人像</span>
+                    <span class="en">Portrait Without Face</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">AI在人脸渲染上的挣扎，创造出这幅面部特征如云雾般飘散的作品。</span>
+                    <span class="en">The AI struggles with faces, creating a portrait where features drift like clouds.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/07-floating-building.png" alt="Floating Architecture">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">悬浮建筑</span>
+                    <span class="en">Floating Architecture</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">在AI的世界里，重力是可选的 - 建筑像气球一样漂浮在空中。</span>
+                    <span class="en">Gravity is optional in the AI's world - buildings float like balloons.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/08-quantum-door.png" alt="Quantum Door">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">量子之门</span>
+                    <span class="en">Quantum Door</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">一扇同时处于多个状态的门 - 开着又关着，这里又那里。</span>
+                    <span class="en">A doorway that exists in multiple states at once - open and closed, here and there.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/09-digital-city.png" alt="Digital Metropolis">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">数字都市</span>
+                    <span class="en">Digital Metropolis</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">一座由纯数据诞生的城市 - 电路成为街道，像素成为建筑。</span>
+                    <span class="en">A city born from pure data - circuits become streets, pixels become buildings.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="work">
+            <img src="生成图片/10-robot-dream.png" alt="Robot's Dream">
+            <div class="work-info">
+                <div class="work-title">
+                    <span class="zh">机器的梦境</span>
+                    <span class="en">Robot's Dream</span>
+                </div>
+                <div class="work-desc">
+                    <span class="zh">机器会梦见什么？也许是电动羊，也许是更特别的东西。</span>
+                    <span class="en">What does a machine dream of? Perhaps electric sheep, perhaps something more.</span>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script>
-        function openModal(el) {
-            const img = el.querySelector('img');
-            const title = el.querySelector('.artwork-title').textContent;
-            const statement = el.querySelector('.artwork-statement').textContent;
-            document.getElementById('modal-img').src = img.src;
-            document.getElementById('modal-info').innerHTML = 
-                '<strong>' + title + '</strong><br><br>' + statement;
-            document.getElementById('modal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-        }
-        document.addEventListener('keydown', function(e) {
-            if(e.key === 'Escape') closeModal();
-        });
-    </script>
 </body>
 </html>
